@@ -1,0 +1,84 @@
+<p>services works!</p>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newl">
+    Create a new Service
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="newl" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Service</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form #createForm="ngForm" (ngSubmit)="createnewserviceform()" >
+                <div class="mb-3">
+                    <label for="servername" class="form-label">Server Name</label>
+                    <input type="text" class="form-control" id="servername" name="serviceName" #serviceName [(ngModel)]="servicesToUpdate.serviceName">
+                </div>
+                <div class="mb-3">
+                    <label for="url" class="form-label">Server Url</label>
+                    <input type="text" class="form-control" id="url" name="url" #url [(ngModel)]="servicesToUpdate.url">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+<!--Show all the -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Service name</th>
+            <th>Service URL</th>
+            <th>Active?</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let service of services">
+            <td><span>{{service.serviceId}}</span></td>
+            <td><span>{{service.url}}</span></td>
+            <td><span>{{service.active}}</span></td>
+           
+            <td><button data-bs-toggle="modal" (click)="updateService(service)" data-bs-target="#exampleModal" class="btn btn-warning" type="button">Update</button></td>
+            <td><button (click)="deleteService(service)"class="btn btn-danger" type="button">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form #updateForm="ngForm" (ngSubmit)="updateServiceWithForm()" >
+            <div class="mb-3">
+                <label for="servername" class="form-label">Server Name</label>
+                <input type="text" class="form-control" id="servername" name="serviceName" #serviceName [(ngModel)]="servicesToUpdate.serviceName">
+            </div>
+            <div class="mb-3">
+                <label for="url" class="form-label">Server Url</label>
+                <input type="text" class="form-control" id="url" name="url" #url [(ngModel)]="servicesToUpdate.url">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Edit</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
